@@ -5,7 +5,13 @@
 <div class="">
   <button type="button" name="button" (click)="logColorSeleccionado()">Mostrar log</button>
   <input type="text" [(ngModel)]="color_seleccionado">
-  <pre [style.border]="color_seleccionado=='red' ? '5px solid black' : '1px solid green'">
+  <pre [style.border]="color_seleccionado=='red' ? '5px solid black' : '1px solid green'"
+       [ngClass]="{
+         fondoAzul:color_seleccionado=='blue',
+         fondoGreen:color_seleccionado=='green'
+       }"
+
+  >
     {{color_seleccionado}}
   </pre>
   <div [ngStyle]="{
@@ -17,36 +23,38 @@
   }" class="">
 
   </div>
-</div>
+  <div style="clear:both"></div>
 
-<br>
-<hr>
-<h1> Siwtch Case colores</h1>
-<div *ngIf="visible==true">
-  <button (click)="cambiarVisble(false)">Mostrar Empleados</button>
-  <ul *ngFor="let trabajador of trabajadores; let i = index">
-    <li [ngSwitch]="color"> <strong>Empleado {{i+1}}</strong>
-      <ul *ngSwitchCase="'red'" [ngStyle]="{
+
+
+  <br>
+  <hr>
+  <h1> Siwtch Case colores</h1>
+  <div *ngIf="visible==true">
+    <button (click)="cambiarVisble(false)">Mostrar Empleados</button>
+    <ul *ngFor="let trabajador of trabajadores; let i = index">
+      <li [ngSwitch]="color"> <strong>Empleado {{i+1}}</strong>
+        <ul *ngSwitchCase="'red'" [ngStyle]="{
         'background':color,
         'color':'white'
       }">
-        <li>{{trabajador.nombre}}</li>
-        <li>{{trabajador.edad}}</li>
-        <li>{{trabajador.oficio}}</li>
-        <li>{{trabajador.visible}}</li>
-      </ul>
-    </li>
-  </ul>
-</div>
+          <li>{{trabajador.nombre}}</li>
+          <li>{{trabajador.edad}}</li>
+          <li>{{trabajador.oficio}}</li>
+          <li>{{trabajador.visible}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
-<div *ngIf="visible==false">
-  <button (click)="cambiarVisble(true)">Mostrar Empleados</button>
-  <ul>
-    <li>{{empleado.nombre}}</li>
-    <li>{{empleado.edad}}</li>
-    <li>{{empleado.oficio}}</li>
-    <li>{{empleado.visible}}</li>
-  </ul>
-</div>
-<hr>
-<h4>Directiva Switch color</h4>
+  <div *ngIf="visible==false">
+    <button (click)="cambiarVisble(true)">Mostrar Empleados</button>
+    <ul>
+      <li>{{empleado.nombre}}</li>
+      <li>{{empleado.edad}}</li>
+      <li>{{empleado.oficio}}</li>
+      <li>{{empleado.visible}}</li>
+    </ul>
+  </div>
+  <hr>
+  <h4>Directiva Switch color</h4>
